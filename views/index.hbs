@@ -1,0 +1,34 @@
+<div class="row">
+    <table class="table table-striped align-middle text-center">
+        <caption>Pokedex</caption>
+        <thead>
+            <tr>
+                <th> Id </th>
+                <th> Nome </th>
+                <th> PvMax </th>
+                <th> Ataque </th>
+                <th> Defesa </th>
+                <th> Ataque Especial </th>
+                <th> Defesa Especial </th>
+                <th> Velocidade </th>
+                <th> Mais detalhes </th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each pokemons}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{id}}.png"><br>{{_nome}}</td>
+                    <td>{{_pvMax}}</td>
+                    <td>{{_ataque}}</td>
+                    <td>{{_defesa}}</td>
+                    <td>{{_ataqueEspecial}}</td>
+                    <td>{{_defesaEspecial}}</td>
+                    <td>{{_velocidade}}</td>
+                    <td><a href="/pokemons/{{id}}">Ver</a></td>
+                   
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>

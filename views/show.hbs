@@ -1,0 +1,19 @@
+{{#with pokemon}}
+<div class="card" style="width: 18rem;">
+  <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{id}}.png" class="card-img-top" alt="{{_nome}}">
+  <div class="card-body">
+    <h5 class="card-title">{{_nome}}</h5>
+    <p class="card-text">Base stats</p>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">pvMax: {{_pvMax}}</li>
+    <li class="list-group-item">Ataque: {{_ataque}}</li>
+    <li class="list-group-item">Defesa: {{_defesa}}</li>
+    <li class="list-group-item">Ataque Especial: {{_ataqueEspecial}}</li>
+    <li class="list-group-item">Defesa Especial: {{_defesaEspecial}}</li>
+    <li class="list-group-item">Velocidade: {{_velocidade}}</li>
+    <li class="list-group-item">Peso: {{_peso}}</li>
+    <li class="list-group-item">Altura: {{_altura}}</li>
+  </ul>
+</div>
+{{/with}}
