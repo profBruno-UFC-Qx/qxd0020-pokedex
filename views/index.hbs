@@ -1,34 +1,14 @@
 <div class="row">
-    <table class="table table-striped align-middle text-center">
-        <caption>Pokedex</caption>
-        <thead>
-            <tr>
-                <th> Id </th>
-                <th> Nome </th>
-                <th> PvMax </th>
-                <th> Ataque </th>
-                <th> Defesa </th>
-                <th> Ataque Especial </th>
-                <th> Defesa Especial </th>
-                <th> Velocidade </th>
-                <th> Mais detalhes </th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each pokemons}}
-                <tr>
-                    <td>{{id}}</td>
-                    <td><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{id}}.png"><br>{{_nome}}</td>
-                    <td>{{_pvMax}}</td>
-                    <td>{{_ataque}}</td>
-                    <td>{{_defesa}}</td>
-                    <td>{{_ataqueEspecial}}</td>
-                    <td>{{_defesaEspecial}}</td>
-                    <td>{{_velocidade}}</td>
-                    <td><a href="/pokemons/{{id}}">Ver</a></td>
-                   
-                </tr>
-            {{/each}}
-        </tbody>
-    </table>
+    {{#each pokemons}}
+    <div class="col"> 
+        <div class="card">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{id}}.png" class="card-img-top img-fluid rounded-start" alt="{{_nome}}">
+            <div class="card-body">
+                <h5 class="card-title">{{_nome}}</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="/pokemons/{{id}}" class="btn btn-danger">Mais detalhes</a>
+            </div>
+        </div>
+    </div>  
+    {{/each}}    
 </div>

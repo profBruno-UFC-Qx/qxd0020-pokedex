@@ -1,19 +1,27 @@
 {{#with pokemon}}
-<div class="card" style="width: 18rem;">
-  <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{id}}.png" class="card-img-top" alt="{{_nome}}">
-  <div class="card-body">
-    <h5 class="card-title">{{_nome}}</h5>
-    <p class="card-text">Base stats</p>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">pvMax: {{_pvMax}}</li>
-    <li class="list-group-item">Ataque: {{_ataque}}</li>
-    <li class="list-group-item">Defesa: {{_defesa}}</li>
-    <li class="list-group-item">Ataque Especial: {{_ataqueEspecial}}</li>
-    <li class="list-group-item">Defesa Especial: {{_defesaEspecial}}</li>
-    <li class="list-group-item">Velocidade: {{_velocidade}}</li>
-    <li class="list-group-item">Peso: {{_peso}}</li>
-    <li class="list-group-item">Altura: {{_altura}}</li>
-  </ul>
-</div>
+<div class="col">
+    <div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{id}}.png" class="card-img-top img-fluid rounded-start" alt="{{_nome}}">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">{{_nome}}</h5>
+                <p class="card-text">Base stats</p>
+                <hr>
+            
+                <div class="row">
+                    {{> stat_progress label="PvMax" value=_pvMax}}
+                    {{> stat_progress label="Ataque" value=_ataque}}
+                    {{> stat_progress label="Defesa" value=_defesa}}
+                    {{> stat_progress label="Ataque Esp." value=_ataqueEspecial}}
+                    {{> stat_progress label="Defesa Esp" value=_defesaEspecial}}
+                    {{> stat_progress label="Altura" value=_altura}}
+                    {{> stat_progress label="Peso" value=_peso}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
 {{/with}}
