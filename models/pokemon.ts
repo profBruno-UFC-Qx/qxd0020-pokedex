@@ -1,5 +1,3 @@
-import pokedex from "../db/pokedex-light.json"
-
 export class Pokemon {
     readonly id: number;
     private _nome: string;
@@ -110,30 +108,3 @@ export class Pokemon {
     }
 
 }
-
-
-
-enum Stats {
-    PV_MAX,
-    ATAQUE,
-    DEFESA,
-    ATAQUE_ESPECIAL,
-    DEFESA_ESPECIAL,
-    VELOCIDADE
-}
-
-let pokemons: Pokemon[] = [];
-
-
-for (let pokemon of pokedex.pokemons) {
-    pokemons.push(new Pokemon(pokemon.id, pokemon.name, pokemon.height, pokemon.weight,
-        pokemon.stats[Stats.PV_MAX].base_stat,
-        pokemon.stats[Stats.ATAQUE].base_stat, 
-        pokemon.stats[Stats.DEFESA].base_stat,
-        pokemon.stats[Stats.ATAQUE_ESPECIAL].base_stat, 
-        pokemon.stats[Stats.DEFESA_ESPECIAL].base_stat,
-        pokemon.stats[Stats.VELOCIDADE].base_stat,)
-    );
-}
-
-export { pokemons };

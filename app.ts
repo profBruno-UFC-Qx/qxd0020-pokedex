@@ -1,7 +1,6 @@
 import express from 'express';
 import { router as pokemonRouter } from './routes/pokemons';
 import { engine } from 'express-handlebars';
-import { extname } from 'path/posix';
 
 const app = express();
 const PORT = 8080;
@@ -10,6 +9,7 @@ app.engine('hbs', engine({
     layoutsDir: __dirname + `/../views/layouts`,
     extname: '.hbs'
 }));
+
 app.set('view engine', '.hbs');
 app.set('views', './views');
 
