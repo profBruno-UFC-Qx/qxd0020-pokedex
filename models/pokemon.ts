@@ -2,6 +2,7 @@ export class Pokemon {
     readonly id: number;
     private _nome: string;
     private _apelido: string = "";
+    readonly tipos: string[];
     private _nivel: number;
     readonly sexo: "M" | "F";
     private _altura: number;
@@ -16,10 +17,11 @@ export class Pokemon {
     private _nivelDeAmizade: number = 0;
     readonly taxaDeCaptura = 100;
 
-    constructor(id: number, nome: string, altura: number, peso: number, pvMax: number,
+    constructor(id: number, nome: string, tipos: string[], altura: number, peso: number, pvMax: number,
          ataque: number, defesa: number, ataqueEspecial: number, defesaEspecial: number, velocidade:number) {
         this.id = id;
         this._nome = nome;
+        this.tipos = tipos;
         this._altura = altura;
         this._peso = peso;
         this._pvMax = pvMax;

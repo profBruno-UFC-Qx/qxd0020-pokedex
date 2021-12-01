@@ -15,7 +15,11 @@ class PokemonService {
 
     constructor() {
         for (let pokemon of pokedex.pokemons) {
-            this._pokemons.push(new Pokemon(pokemon.id, pokemon.name, pokemon.height, pokemon.weight,
+            this._pokemons.push(new Pokemon(pokemon.id,
+                pokemon.name, 
+                pokemon.types.flatMap((types) => types.type.name),
+                pokemon.height, 
+                pokemon.weight,
                 pokemon.stats[Stats.PV_MAX].base_stat,
                 pokemon.stats[Stats.ATAQUE].base_stat, 
                 pokemon.stats[Stats.DEFESA].base_stat,
