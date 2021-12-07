@@ -5,3 +5,8 @@ to a final version using Node.js, TypeScript, Vue and Mongodb.
 
 - [v1: Pure Node + TypeScript](../../commit/d7ac067b7ae0e9a444ff8fc35e91f2cd86a1bd7d):
 ![v1 Node + TS](img/pokedex-v1.png)
+
+- [v2: Node + Express + Handlebras](../../commit/3f5c6858361d981735e01de3c3af79ba22209b62):
+![v2 Main page](img/pokedex-v2-show-all.png)
+
+![v2 Pokemon page](img/pokedex-v2-show-one.png)
