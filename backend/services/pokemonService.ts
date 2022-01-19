@@ -1,5 +1,5 @@
 import { Pokemon } from "../models/pokemon";
-import pokedex from "../db/pokedex.json"
+import pokedex from "../db/pokedex-light.json"
 
 enum Stats {
     PV_MAX,
