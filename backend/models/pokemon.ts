@@ -16,6 +16,7 @@ export class Pokemon {
     private _pvAtual: number = 1;
     private nivelDeAmizade: number = 0;
     readonly taxaDeCaptura = 100;
+    readonly img: string;
 
     constructor(id: number, nome: string, tipos: string[], altura: number, peso: number, pvMax: number,
          ataque: number, defesa: number, ataqueEspecial: number, defesaEspecial: number, velocidade:number) {
@@ -30,6 +31,7 @@ export class Pokemon {
         this.ataqueEspecial = ataqueEspecial;
         this.defesaEspecial = defesaEspecial;
         this.velocidade = velocidade;
+        this.img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
         this._nivel = 1;
         if (Math.random() > 0.5) {
             this.sexo = "M";

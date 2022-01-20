@@ -13,7 +13,7 @@
         </div>
         <div class="col">
             <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: {{valor}}%" aria-valuenow="{{valor}}" aria-valuemin="0" aria-valuemax="{{valorMax}}"></div>
+                <div class="progress-bar" role="progressbar" :style="{ width: valor + '%'}"></div>
             </div>
         </div>
     </div>

@@ -3,8 +3,6 @@ import { ref } from "@vue/reactivity"
 import { useStore } from 'vuex'
 import { onMounted } from 'vue'
 
-import PokemonCard from './components/PokemonCard.vue'
-
 const store = useStore()
 
 onMounted(() => {
@@ -17,12 +15,7 @@ onMounted(() => {
   <div>
     <h2>Pokedex</h2>
     <div class="row">
-        <PokemonCard v-for="pokemon in store.state.pokemons" 
-          :key="pokemon.id"
-          :id="pokemon.id"
-          :nome="pokemon.nome"
-          :tipos="pokemon.tipos"> 
-        </PokemonCard>   
+        <router-view></router-view>
     </div>
   </div>
 </template>

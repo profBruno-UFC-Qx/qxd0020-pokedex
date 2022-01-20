@@ -4,6 +4,7 @@ import { createStore } from 'vuex'
 
 const state = {
     pokemons: [],
+    currentPokemon: null
 };
 
 const getters = {
@@ -18,11 +19,22 @@ const actions = {
             console.log(error);
         }
     },
+    async getPokemon({ commit }, id: number) {
+        try {
+            const response = await axios.get(`http://localhost:8080/pokemons/${id}`);
+            commit('setPokemon', response.data);
+        } catch(error) {
+            console.log(error);
+        }
+    }
 }
 
 const mutations = {
     setPokemons(state, pokemons) {
         state.pokemons = pokemons;
+    },
+    setPokemon(state, pokemon) {
+        state.currentPokemon = pokemon;
     }
 
 }
