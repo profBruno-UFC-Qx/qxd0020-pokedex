@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import PokemonType from './PokemonTypeBadge.vue';
+import { getCorPorTipo } from '../mixin/pokemonCardMixin'
 
 const props = defineProps<{
     id: number,
@@ -9,37 +10,7 @@ const props = defineProps<{
     img: URL
 }>()
 
-function getColor(type) {
-    return {
-        grass: "#78C850",
-        poison: "#A040A0",
-        fire: "#F08030",
-        flying: "#A890F0",
-        water: "#6890F0",
-        bug: "#A8B820",
-        normal: "#A8A878",
-        electric: "#F8D030",
-        ground: "#E0C068",
-        fairy: "#EE99AC",
-        fighting: "#C03028",
-        psychic: "#A890F0",
-        rock: "#B8A038",
-        steel: "#B8B8D0",
-        ice: "#98D8D8",
-        ghost: "#705898",
-        dragon: "#7038F8",
-        dark: "#705848",
-
-    }[type]
-}
-
-const  [tipo1, tipo2 ]  =  props.tipos
-
-const color1 = getColor(tipo1)
-const color2 = getColor(tipo2 ? tipo2 : tipo1)
-
-
-
+const  [cor1, cor2]  =  getCorPorTipo(props.tipos)
 
 </script>
 
@@ -63,7 +34,7 @@ const color2 = getColor(tipo2 ? tipo2 : tipo1)
 <style scoped>
 
 .pokemon-card {
-    background-image: linear-gradient(90deg, v-bind(color1) 50%, v-bind(color2) 50%);
+    background-image: linear-gradient(90deg, v-bind(cor1) 50%, v-bind(cor2) 50%);
     box-shadow: 0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);
 }
 

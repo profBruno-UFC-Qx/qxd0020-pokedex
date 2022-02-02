@@ -8,11 +8,14 @@ const store = useStore();
 </script>
 
 <template>
-    <PokemonCard v-for="pokemon in store.state.pokemons"
-        :key="pokemon.id"
-        :id="pokemon.id"
-        :nome="pokemon.nome"
-        :tipos="pokemon.tipos"
-        :img="pokemon.img"> 
-    </PokemonCard>
+    <h2>Pokedex</h2>
+    <div class="row">
+        <PokemonCard v-for="pokemon in store.state.pokemons"
+            :key="pokemon.id"
+            :id="pokemon.id"
+            :nome="pokemon.nome"
+            :tipos="pokemon.tipos"
+            :img="pokemon.img"> 
+        </PokemonCard>
+    </div>
 </template>

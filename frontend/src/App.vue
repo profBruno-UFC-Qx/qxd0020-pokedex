@@ -12,12 +12,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <h2>Pokedex</h2>
-    <div class="row">
-        <router-view></router-view>
-    </div>
-  </div>
+    <router-view></router-view>
 </template>
 
 <style>

@@ -3,34 +3,50 @@
 import PokemonStatus from '../components/PokemonStatus.vue';
 import PokemonType from '../components/PokemonTypeBadge.vue';
 import { useStore } from 'vuex';
-import { onMounted, computed } from 'vue'
-import { useRouter} from 'vue-router'
+import { computed } from 'vue'
+import { onBeforeRouteUpdate }  from 'vue-router'
+import { getCorPorTipo } from '../mixin/pokemonCardMixin'
 
 const store = useStore();
 
 const props = defineProps<{
     id: string
 }>();
-
-store.dispatch('getPokemon', props.id);
 const pokemon = computed(() => store.state.currentPokemon);
+
+const cores  = computed(() => getCorPorTipo(pokemon.value.tipos))
+const cor1 = computed(() => cores.value[0])
+const cor2 = computed(() => cores.value[1])
+const numberOfPokemons = computed(() => store.getters.getNumberOfPokemons)
+
+onBeforeRouteUpdate((to, from) => {
+    if (to.params.id != from.params.id) {
+        store.dispatch('getPokemon', to.params.id)        
+    }
+})
+
+store.dispatch('getPokemon', props.id)
+
 
 </script>
 
 <template>
     
 <div class="col" v-if="pokemon">
-    <div class="card mt-3 mb-3" style="max-width: 540px;">
+    <div class="card mt-3 mb-3">
+        <div class="row g-0" :style="`background-color: ${cor1}`">
+            <h5 class="card-title">{{pokemon.nome}}</h5>
+        </div>
         <div class="row g-0">
             <div class="col-md-4">
                 <img :src="pokemon.img" class="card-img-top img-fluid rounded-start" alt="{{nome}}">
             </div>
             
             <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">{{id}}# {{pokemon.nome}} 
+                <div class="card-body text-start">
+                    <h5 class="card-title">#{{id}}
                         <small class="text-muted">
-                            <PokemonType v-for="(tipo, i) in pokemon.tipos" :key="i" class="badge bg-secondary">{{tipo}}</PokemonType>
+                            <PokemonType v-for="(tipo, i) in pokemon.tipos" :key="i" class="badge" :style="{'background\-color': cores[i]}">{{tipo}}</PokemonType>
                         </small>
                     </h5>
                     
@@ -42,12 +58,28 @@ const pokemon = computed(() => store.state.currentPokemon);
                     
                     <hr>
                     <div class="row">
-                        <PokemonStatus label="PvMax" :valor="pokemon.pvMax"></PokemonStatus>
-                        <PokemonStatus label="Ataque" :valor="pokemon.ataque"></PokemonStatus>
-                        <PokemonStatus label="Defesa" :valor="pokemon.defesa"></PokemonStatus>
-                        <PokemonStatus label="Ataque Esp." :valor="pokemon.ataqueEspecial"></PokemonStatus>
-                        <PokemonStatus label="Defesa Esp." :valor="pokemon.defesaEspecial"></PokemonStatus>
-                        <PokemonStatus label="Velocidade" :valor="pokemon.velocidade"></PokemonStatus>
+                        <PokemonStatus label="PvMax" :valor="pokemon.pvMax" :color="cor2"></PokemonStatus>
+                        <PokemonStatus label="Ataque" :valor="pokemon.ataque" :color="cor2"></PokemonStatus>
+                        <PokemonStatus label="Defesa" :valor="pokemon.defesa" :color="cor2"></PokemonStatus>
+                        <PokemonStatus label="Ataque Esp." :valor="pokemon.ataqueEspecial" :color="cor2"></PokemonStatus>
+                        <PokemonStatus label="Defesa Esp." :valor="pokemon.defesaEspecial" :color="cor2"></PokemonStatus>
+                        <PokemonStatus label="Velocidade" :valor="pokemon.velocidade" :color="cor2"></PokemonStatus>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <router-link :to="`/pokemons/${Math.max(Number(id) - 1, 1)}`">
+                            <button type="button" :class="{disabled: Number(id) === 1}" class="btn text-light" :style="{'background\-color': cor1}">
+                                <i class="bi bi-arrow-left-square"></i> Anterior
+                            </button>
+                        </router-link>
+                    </div>
+                    <div class="col-md-6">
+                        <router-link :to="`/pokemons/${Math.min(Number(id) + 1, numberOfPokemons)}`">
+                            <button type="button" :class="{disabled: Number(id) === numberOfPokemons}" class="btn text-light" :style="{'background\-color': cor2}">
+                                <i class="bi bi-arrow-right-square"></i> Próximo
+                            </button>
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -56,3 +88,18 @@ const pokemon = computed(() => store.state.currentPokemon);
 </div> 
     
 </template>
+
+<!--
+<style scoped>
+
+.bg-pokemon-primary-type {
+    background-color: v-bind(cor1);
+}
+
+.bg-pokemon-secondary-type {
+    background-color: v-bind(cor2);
+}
+
+
+</style>
+-->

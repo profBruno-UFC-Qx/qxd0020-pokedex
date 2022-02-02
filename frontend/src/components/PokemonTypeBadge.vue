@@ -1,5 +1,5 @@
 <template>
-    <span class="badge bg-light rounded-pill text-dark">
+    <span class="badge rounded-pill">
         <slot></slot>
     </span>
 </template>
