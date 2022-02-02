@@ -19,7 +19,18 @@ const state = {
 const getters = {
     getNumberOfPokemons(state) {
         return state.pokemons.length
-    }
+    },
+    getFilteredPokemon: (state) => (text) => {
+        if(text.length == 0) {
+            return state.pokemons
+        }
+        return state.pokemons.filter(
+            pokemon => {
+                const informationConcatenated = pokemon.tipos.concat([pokemon.nome]).reduce((previous, current) => previous + current)
+                return informationConcatenated.includes(text)
+            }
+        )
+    },
 }
 
 const actions = {
