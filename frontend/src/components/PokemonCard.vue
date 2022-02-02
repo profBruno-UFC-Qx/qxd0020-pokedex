@@ -41,7 +41,8 @@ const  [cor1, cor2]  =  getCorPorTipo(props.tipos)
 
 .pokemon-name {
     background-color: rgba(0,0,0,.5);
-     color: white;
+    color: white;
+    text-transform: capitalize;
 }
 
 </style>

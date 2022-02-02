@@ -31,11 +31,15 @@ store.dispatch('getPokemon', props.id)
 </script>
 
 <template>
-    
+<router-link to="/pokemons/">
+    <button type="button" class="btn btn-outline-danger back-button">
+        <i class="bi bi-arrow-left-circle"></i> Voltar
+    </button>
+</router-link> 
 <div class="col" v-if="pokemon">
     <div class="card mt-3 mb-3">
         <div class="row g-0" :style="`background-color: ${cor1}`">
-            <h5 class="card-title">{{pokemon.nome}}</h5>
+            <h5 class="card-title pokemon-name">{{pokemon.nome}}</h5>
         </div>
         <div class="row g-0">
             <div class="col-md-4">
@@ -67,14 +71,14 @@ store.dispatch('getPokemon', props.id)
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col">
                         <router-link :to="`/pokemons/${Math.max(Number(id) - 1, 1)}`">
                             <button type="button" :class="{disabled: Number(id) === 1}" class="btn text-light" :style="{'background\-color': cor1}">
                                 <i class="bi bi-arrow-left-square"></i> Anterior
                             </button>
                         </router-link>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col">
                         <router-link :to="`/pokemons/${Math.min(Number(id) + 1, numberOfPokemons)}`">
                             <button type="button" :class="{disabled: Number(id) === numberOfPokemons}" class="btn text-light" :style="{'background\-color': cor2}">
                                 <i class="bi bi-arrow-right-square"></i> Próximo
@@ -86,20 +90,19 @@ store.dispatch('getPokemon', props.id)
         </div>
     </div>
 </div> 
-    
 </template>
 
-<!--
+
 <style scoped>
 
-.bg-pokemon-primary-type {
-    background-color: v-bind(cor1);
+.pokemon-name {
+    text-transform: capitalize;
 }
 
-.bg-pokemon-secondary-type {
-    background-color: v-bind(cor2);
+.back-button {
+    position: absolute;
+    top: 1em;
+    left: 3em;
 }
-
 
 </style>
--->
