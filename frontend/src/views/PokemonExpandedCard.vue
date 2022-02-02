@@ -9,7 +9,7 @@ import { useRouter} from 'vue-router'
 const store = useStore();
 
 const props = defineProps<{
-    id: number
+    id: string
 }>();
 
 store.dispatch('getPokemon', props.id);
@@ -28,7 +28,7 @@ const pokemon = computed(() => store.state.currentPokemon);
             
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">{{pokemon.nome}} 
+                    <h5 class="card-title">{{id}}# {{pokemon.nome}} 
                         <small class="text-muted">
                             <PokemonType v-for="(tipo, i) in pokemon.tipos" :key="i" class="badge bg-secondary">{{tipo}}</PokemonType>
                         </small>

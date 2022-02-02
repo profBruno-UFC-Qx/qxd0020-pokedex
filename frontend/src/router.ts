@@ -8,6 +8,6 @@ export const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: '/', component: PokemonListCard, alias: '/pokemons' },
-    { name: 'details', path: '/pokemons/:id', component: PokemonExpandedCard, props: true }
+    { path: '/pokemons/:id', component: PokemonExpandedCard, props: true }
   ],
 });
