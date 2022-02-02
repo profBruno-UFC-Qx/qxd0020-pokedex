@@ -1,6 +1,15 @@
 import { createStructuralDirectiveTransform } from '@vue/compiler-core';
-import axios from 'axios'
+import Axios from 'axios'
 import { createStore } from 'vuex'
+
+export const axios = Axios.create({
+    baseURL: 'http://localhost:8080/',
+    timeout: 1000,
+    headers: {
+        Accept: "application/json",
+        "Content-type": "application/json"
+    }
+})
 
 const state = {
     pokemons: [],
@@ -43,9 +52,10 @@ const mutations = {
 }
 
 
-export default createStore({
+export const store = createStore({
     state: state,
     getters: getters,
     actions: actions,
     mutations: mutations
 })
+
