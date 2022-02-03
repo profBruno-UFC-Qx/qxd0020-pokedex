@@ -15,7 +15,7 @@ export function getCorPorTipo(tipos: string[]): string[]{
         ground: "#E0C068",
         fairy: "#EE99AC",
         fighting: "#C03028",
-        psychic: "#A890F0",
+        psychic: "#F85888",
         rock: "#B8A038",
         steel: "#B8B8D0",
         ice: "#98D8D8",
