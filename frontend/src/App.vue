@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref } from "@vue/reactivity"
-import { useStore } from 'vuex'
 import { onMounted } from 'vue'
+import { pokemonStore } from './stores/pokemon'
 
-const store = useStore()
+const store = pokemonStore()
 
 onMounted(() => {
-  store.dispatch('getPokemons')
+  store.getPokemons()
 })
 
 </script>

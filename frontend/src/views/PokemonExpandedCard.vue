@@ -2,30 +2,31 @@
 
 import PokemonStatus from '../components/PokemonStatus.vue';
 import PokemonType from '../components/PokemonTypeBadge.vue';
-import { useStore } from 'vuex';
 import { computed } from 'vue'
 import { onBeforeRouteUpdate }  from 'vue-router'
 import { getCorPorTipo } from '../mixin/pokemonCardMixin'
+import { pokemonStore } from '../stores/pokemon';
 
-const store = useStore();
+const store = pokemonStore();
 
 const props = defineProps<{
     id: string
 }>();
-const pokemon = computed(() => store.state.currentPokemon);
 
-const cores  = computed(() => getCorPorTipo(pokemon.value.tipos))
+const pokemon = computed(() => store.currentPokemon);
+
+const cores  = computed(() => getCorPorTipo(pokemon.value ? pokemon.value.tipos : []))
 const cor1 = computed(() => cores.value[0])
 const cor2 = computed(() => cores.value[1])
-const numberOfPokemons = computed(() => store.getters.getNumberOfPokemons)
+const numberOfPokemons = computed(() => store.numberOfPokemons)
 
 onBeforeRouteUpdate((to, from) => {
     if (to.params.id != from.params.id) {
-        store.dispatch('getPokemon', to.params.id)        
+        store.getPokemon(Number(to.params.id))
     }
 })
 
-store.dispatch('getPokemon', props.id)
+store.getPokemon(Number(props.id))
 
 
 </script>
