@@ -2,10 +2,10 @@
   "name": "pokedex",
   "version": "1.0.0",
   "description": "Pokedex implemented using typescript and node",
-  "main": "index.js",
+  "main": "dist/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon dist/app.js"
+    "dev": "nodemon app.ts"
   },
   "keywords": [
     "pokemon",
