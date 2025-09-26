@@ -14,7 +14,7 @@ app.engine('hbs', engine({
 app.set('view engine', '.hbs');
 app.set('views', './views');
 
-app.use(cors({ origin: 'http://localhost:3000'}))
+app.use(cors({ origin: 'http://localhost:5173'}))
 app.use('/pokemons', pokemonRouter)
 
 
