@@ -2,15 +2,17 @@
 
 import PokemonType from '@/components/PokemonTypeBadge.vue';
 import { useColor } from '@/composables/useTypeColor';
+import type { PokeType } from '@/types';
 
 const props = defineProps<{
     id: number,
     nome: string,
-    tipos: string[],
+    tipos: PokeType[],
     img: string
 }>()
 
-const  [cor1, cor2]  =  useColor(props.tipos)
+const cor1 = useColor(props.tipos[0])
+const cor2 = props.tipos.length > 1 ? useColor(props.tipos[1]) : cor1
 
 </script>
 
@@ -22,7 +24,7 @@ const  [cor1, cor2]  =  useColor(props.tipos)
                 <div>
                     <img :src="img" class="card-img-top img-fluid rounded-start" :alt="nome">
                     <p class="text-center">
-                        <PokemonType v-for="(tipo, i) in tipos" :key="i" >{{tipo}}</PokemonType>
+                        <PokemonType  :types="props.tipos"/>
                     </p>
                     <h5 class="mb-0 pokemon-name" >{{nome}}</h5>
                 </div>
