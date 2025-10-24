@@ -3,6 +3,8 @@
 The idea of this repo is to evolve a Pokedex starting with pure Node.js + Typescript
 to a final version using Node.js, TypeScript, Vue and Mongodb.
 
+- v4: (Node + Express) + (Node + Vue + VueRouter)
+
 - v3: (Node + Express) + (Node + Vue + Vuex + VueRouter)
 
 ![v3 Main page](img/pokedex-spa-show-all.png)
