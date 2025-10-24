@@ -3,7 +3,7 @@
 const props = defineProps<{
     label: string,
     valor: number,
-    color: string
+    color?: string
 }>();
 
 </script>
@@ -15,7 +15,7 @@ const props = defineProps<{
         </div>
         <div class="col-9">
             <div class="progress">
-                <div class="progress-bar text-start ps-1" role="progressbar" :style="{ width: valor + '%', 'background\-color': color}">
+                <div class="progress-bar text-start ps-1" role="progressbar" :style="[color ? {'background\-color': color} : '', { width: valor + '%'}]">
                     {{valor}}
                 </div>
             </div>

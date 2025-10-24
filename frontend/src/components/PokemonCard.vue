@@ -11,8 +11,9 @@ const props = defineProps<{
     img: string
 }>()
 
-const cor1 = useColor(props.tipos[0])
-const cor2 = props.tipos.length > 1 ? useColor(props.tipos[1]) : cor1
+const color1 = useColor(props.tipos[0])
+const color2 = props.tipos.length > 1 ? useColor(props.tipos[1]) : color1
+
 
 </script>
 
@@ -36,7 +37,7 @@ const cor2 = props.tipos.length > 1 ? useColor(props.tipos[1]) : cor1
 <style scoped>
 
 .pokemon-card {
-    background-image: linear-gradient(90deg, v-bind(cor1) 50%, v-bind(cor2) 50%);
+    background-image: linear-gradient(90deg, v-bind(color1) 0 50%, v-bind(color2) 50% 100%);
     box-shadow: 0 1px 3px rgba(0,0,0,.12),0 1px 2px rgba(0,0,0,.24);
 }
 

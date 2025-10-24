@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { onBeforeRouteUpdate, useRoute }  from 'vue-router'
 import PokemonStatus from '../components/PokemonStatus.vue';
 import PokemonType from '../components/PokemonTypeBadge.vue';
@@ -11,19 +11,29 @@ const pokemon = ref<Pokemon>({} as Pokemon);
 const route = useRoute()
 const loading = ref(true)
 
-onMounted(async () => {
-    const res = await getById(Number(route.params.id))
-    pokemon.value = res.data
-    loading.value = false
+const color1 = computed(() => pokemon.value.tipos[0])
+const color2 = computed(() => {
+    return pokemon.value.tipos.length > 1 ? pokemon.value.tipos[1] : color1.value
 })
 
-const cor1 = computed(() =>  useColor(pokemon.value.tipos[0]))
-const cor2 = computed(() =>  pokemon.value.tipos.length > 1 ? useColor(pokemon.value.tipos[1]) : cor1.value)
+async function loadPokemon(id: number) {
+    try {
+        const res = await getById(Number(id));
+        pokemon.value = res.data;
+    } catch (e) {
+        window.alert(e);
+    } finally {
+        loading.value = false;
+    }
+}
 
-onBeforeRouteUpdate(async (to, from) => {
-    if (to.params.id != from.params.id) {
-        const res = await getById(Number(to.params.id))
-        pokemon.value = res.data
+onMounted(async () => {
+    await loadPokemon(Number(route.params.id));
+})
+
+onBeforeRouteUpdate( async (to, from) => {
+    if(to.params.id != from.params.id) {
+        await loadPokemon(Number(to.params.id))
     }
 })
 
@@ -37,8 +47,8 @@ onBeforeRouteUpdate(async (to, from) => {
 </router-link> 
 <div class="col" v-if="loading == false">
     <div class="card mt-3 mb-3">
-        <div class="row g-0" :style="`background-color: ${cor1}`">
-            <h5 class="card-title pokemon-name">{{pokemon.nome}}</h5>
+        <div class="row g-0">
+            <h5 class="card-title pokemon-name" :style="{'background\-color': useColor(color1)}" >{{pokemon.nome}}</h5>
         </div>
         <div class="row g-0 mb-2">
             <div class="col-md-4">
@@ -61,25 +71,25 @@ onBeforeRouteUpdate(async (to, from) => {
                     
                     <hr>
                     <div class="row">
-                        <PokemonStatus label="PvMax" :valor="pokemon.pvMax" :color="cor2"></PokemonStatus>
-                        <PokemonStatus label="Ataque" :valor="pokemon.ataque" :color="cor2"></PokemonStatus>
-                        <PokemonStatus label="Defesa" :valor="pokemon.defesa" :color="cor2"></PokemonStatus>
-                        <PokemonStatus label="Ataque Esp." :valor="pokemon.ataqueEspecial" :color="cor2"></PokemonStatus>
-                        <PokemonStatus label="Defesa Esp." :valor="pokemon.defesaEspecial" :color="cor2"></PokemonStatus>
-                        <PokemonStatus label="Velocidade" :valor="pokemon.velocidade" :color="cor2"></PokemonStatus>
+                        <PokemonStatus label="PvMax" :valor="pokemon.pvMax" :color="useColor(color2)"></PokemonStatus>
+                        <PokemonStatus label="Ataque" :valor="pokemon.ataque" :color="useColor(color2)"></PokemonStatus>
+                        <PokemonStatus label="Defesa" :valor="pokemon.defesa" :color="useColor(color2)"></PokemonStatus>
+                        <PokemonStatus label="Ataque Esp." :valor="pokemon.ataqueEspecial" :color="useColor(color2)"></PokemonStatus>
+                        <PokemonStatus label="Defesa Esp." :valor="pokemon.defesaEspecial" :color="useColor(color2)"></PokemonStatus>
+                        <PokemonStatus label="Velocidade" :valor="pokemon.velocidade" :color="useColor(color2)"></PokemonStatus>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <router-link :to="`/pokemons/${Math.max(Number(pokemon.id) - 1, 1)}`">
-                            <button type="button" :class="{disabled: Number(pokemon.id) === 1}" class="btn text-light" :style="{'background\-color': cor1}">
+                        <router-link :to="`/pokemons/${Math.max(pokemon.id - 1, 1)}`">
+                            <button type="button" class="btn text-light" :disabled="pokemon.id == 1" :style="{'background\-color': useColor(color1)}">
                                 <i class="bi bi-arrow-left-square"></i> Anterior
                             </button>
                         </router-link>
                     </div>
                     <div class="col">
-                        <router-link :to="`/pokemons/${Math.min(Number(pokemon.id) + 1, 151)}`">
-                            <button type="button" :class="{disabled: Number(pokemon.id) === 151}" class="btn text-light" :style="{'background\-color': cor2}">
+                        <router-link :to="`/pokemons/${Math.min(251, Number(pokemon.id) + 1)}`">
+                            <button type="button" class="btn text-light" :disabled="pokemon.id == 251" :style="{'background\-color': useColor(color2)}">
                                 <i class="bi bi-arrow-right-square"></i> Próximo
                             </button>
                         </router-link>
